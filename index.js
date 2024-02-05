@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js')
-const { token } = require('./config.json')
+const token = process.env.TOKEN
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.commands = new Collection()
