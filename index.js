@@ -21,8 +21,13 @@ for (const folder of commandFolders) {
     }
 }
 
-client.once(Events.ClientReady, client => {
+client.once(Events.ClientReady, async client => {
     console.log(`Logged in as ${client.user.tag}`)
+    const commands = await client.application.commands.fetch()
+
+    commands.forEach(command => {
+        console.log(`Command name: ${command.name}, Command description: ${command.name}`)
+    })
 })
 client.login(token)
 

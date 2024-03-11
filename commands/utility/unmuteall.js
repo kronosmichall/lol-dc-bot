@@ -14,6 +14,7 @@ module.exports = {
             if (member.voice.channel) {
                 member.voice.setMute(false)
             }
+            console.log('member', member)
         })
         await interaction.reply(`Pozwalam wam szczekać`)
     },
