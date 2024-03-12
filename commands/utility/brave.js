@@ -17,10 +17,19 @@ async function getScreenshot() {
         `[class="ub-rune-stats"]`, 
         `[class="ub-items"]`, 
         `[class="ub-role-item"]`, 
-        `[class="ub-share-bar mt-2"]`
         `[class="ub-data-set-title"]`,
+        `[class="ub-champion-portrait"]`,
+        `[class="ub-data-set-title"]`,
+        `[class="champion-name"]`,
     ]
-    await Promise.all(selectors.map(selector => page.waitForSelector(selector)))
+    const promises = selectors.map(selector => page.waitForSelector(selector))
+    for (const promise of promises) {
+        try {
+            await promise
+        } catch(e) {
+            console.error(e)
+        }
+    }
     try {
         await page.click('.fc-button.fc-cta-do-not-consent.fc-secondary-button')
     } catch (e) {
@@ -28,7 +37,7 @@ async function getScreenshot() {
         console.error(e)
     }
     await page.screenshot({ path: filename })
-    await browser.close()
+    browser.close()
 
     return filename
 }
