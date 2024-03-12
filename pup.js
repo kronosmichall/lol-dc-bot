@@ -7,7 +7,19 @@ async function getScreenshot() {
     const page = await browser.newPage()
     await page.setViewport({ width: 1000, height: 800 })
     await page.goto('https://www.ultimate-bravery.net/Classic', { waitUntil: ['load', 'domcontentloaded'] })
-    await page.waitForSelector('[class="ub-share-bar mt-2"]', { timeout: 5_000 })
+
+    const selectors = [
+        `[class="up-fist-spell-to-maximize-img"]`, 
+        `[class="ub-summoner-spells"]`, 
+        `[class="ub-runes-primary"]`, 
+        `[class="ub-runes-secondary"]`, 
+        `[class="ub-rune-stats"]`, 
+        `[class="ub-items"]`, 
+        `[class="ub-role-item"]`, 
+        `[class="ub-share-bar mt-2"]`
+        `[class="ub-data-set-title"]`,
+    ]
+    await Promise.all(selectors.map(selector => page.waitForSelector(selector)))
     try {
         await page.click('.fc-button.fc-cta-do-not-consent.fc-secondary-button')
     } catch (e) {
