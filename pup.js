@@ -29,8 +29,11 @@ async function getScreenshot() {
             console.error(e)
         }
     }
+    console.log("waiting 5 seconds")
+    await new Promise(resolve => setTimeout(resolve, 5000))
+    console.log("done waiting 5 seconds")
     try {
-        await page.click('.fc-button.fc-cta-do-not-consent.fc-secondary-button')
+    await page.click('.fc-button.fc-cta-do-not-consent.fc-secondary-button')
     } catch (e) {
         console.error('No cookie consent found')
         console.error(e)
