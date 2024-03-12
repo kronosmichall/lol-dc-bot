@@ -2,22 +2,15 @@ const { SlashCommandBuilder } = require('discord.js')
 const puppeteer = require('puppeteer')
 const fs = require('fs')
 
-async function loadUrl(page, url) {
-    try {
-        await page.goto(url, {
-            timeout: 20000,
-            waitUntil: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2']
-        })
-    } catch (error) {
-        throw new Error("url " + url + " url not loaded -> " + error)
-    }
-}
 async function getScreenshot() {
     const filename = new Date().getTime() + '.png'
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
     const page = await browser.newPage()
     await page.setViewport({ width: 1000, height: 800 })
-    loadUrl(page, 'https://www.ultimate-bravery.net/Classic')
+    await page.goto('https://www.ultimate-bravery.net/Classic', { waitUntil: ['load', 'domcontentloaded'] })
+    await page.waitForNavigation()
+    await page.waitForTimeout(5000)
+
     try {
         await page.click('.fc-button.fc-cta-do-not-consent.fc-secondary-button')
     } catch (e) {
