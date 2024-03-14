@@ -9,12 +9,20 @@ module.exports = {
         const members = guild.members.cache
         
         members.forEach(member => {
-            console.log('username', member.user.username)
+            console.log("==============================================")
+            console.log("calling mute on", member.user.username)
+            console.log('member', member)
+            console.log("==============================================")
             console.log('voice', member.voice)
             if (member.voice.channel) {
-                member.voice.setMute(true)
+                try {
+                    member.voice.setMute(true)
+                    console.log("successfull mute", member.user.username)
+                } catch (e) {
+                    console.error(e)
+                    console.log("failed mute", member.user.username)
+                }
             }
-            console.log('member', member)
         })
         await interaction.reply(`Kurwy zamilkły`)
     },
