@@ -24,6 +24,6 @@ module.exports = {
                 }
             }
         })
-        await interaction.reply(`Kurwy zamilkły`)
+        await interaction.reply(`shush`)
     },
 }

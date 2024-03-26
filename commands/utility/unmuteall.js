@@ -24,6 +24,6 @@ module.exports = {
                 }
             }
         })
-        await interaction.reply(`Pozwalam wam szczekać`)
+        await interaction.reply(`you can talk now`)
     },
 }
